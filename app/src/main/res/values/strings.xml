@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TakeMySigns</string>
+    <string name="error_web_home">Error loading page</string>
+    <string name="error_web_home_description">The demo server may be starting up. Pull-to-refresh to try again in a minute.</string>
+    <string name="menu_progress">Loading…</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="get_started">Get Started</string>
+    <string name="hide_password">Hide Password</string>
+    <string name="show_password">Show Password</string>
+</resources>

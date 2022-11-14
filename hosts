@@ -1,0 +1,7 @@
+127.0.0.1       localhost
+::1             ip6-localhost
+10.0.2.2        app.app.home
+10.0.2.2        admin.app.home
+10.0.2.2        drivers.app.home
+10.0.2.2        app.home
+10.0.2.2        example.com

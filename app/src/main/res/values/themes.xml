@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.TakeMySigns.DayNight" parent="Theme.TakeMySigns" />
+
+    <!--Base custom theme which will be shared between both light and dark theme variants-->
+    <style name="Theme.TakeMySigns" parent="Base.MaterialThemeBuilder">
+        <!--Material color attributes -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryVariant">@color/color_primary_variant</item>
+        <item name="colorSecondary">@color/color_secondary</item>
+        <item name="colorSecondaryVariant">@color/color_secondary_variant</item>
+
+        <item name="android:colorBackground">@color/color_background</item>
+        <item name="colorSurface">@color/color_surface</item>
+        <item name="colorError">@color/color_error</item>
+
+        <item name="colorOnPrimary">@color/color_on_primary</item>
+        <item name="colorOnSecondary">@color/color_on_secondary</item>
+        <item name="colorOnBackground">@color/color_on_background</item>
+        <item name="colorOnSurface">@color/color_on_surface</item>
+        <item name="colorOnError">@color/color_on_error</item>
+
+        <!--Material type attributes-->
+        <!--        <item name="textAppearanceHeadline1">@style/TextAppearance.TakeMySigns.Headline1</item>-->
+        <!--        <item name="textAppearanceHeadline2">@style/TextAppearance.TakeMySigns.Headline2</item>-->
+        <!--        <item name="textAppearanceHeadline3">@style/TextAppearance.TakeMySigns.Headline3</item>-->
+        <!--        <item name="textAppearanceHeadline4">@style/TextAppearance.TakeMySigns.Headline4</item>-->
+        <!--        <item name="textAppearanceHeadline5">@style/TextAppearance.TakeMySigns.Headline5</item>-->
+        <!--        <item name="textAppearanceHeadline6">@style/TextAppearance.TakeMySigns.Headline6</item>-->
+        <!--        <item name="textAppearanceSubtitle1">@style/TextAppearance.TakeMySigns.Subtitle1</item>-->
+        <!--        <item name="textAppearanceSubtitle2">@style/TextAppearance.TakeMySigns.Subtitle2</item>-->
+        <!--        <item name="textAppearanceBody1">@style/TextAppearance.TakeMySigns.Body1</item>-->
+        <!--        <item name="textAppearanceBody2">@style/TextAppearance.TakeMySigns.Body2</item>-->
+        <!--        <item name="textAppearanceButton">@style/TextAppearance.TakeMySigns.Button</item>-->
+        <!--        <item name="textAppearanceCaption">@style/TextAppearance.TakeMySigns.Caption</item>-->
+        <!--        <item name="textAppearanceOverline">@style/TextAppearance.TakeMySigns.Overline</item>-->
+
+        <!--        &lt;!&ndash;Material shape attributes&ndash;&gt;-->
+        <!--        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.TakeMySigns.SmallComponent</item>-->
+        <!--        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.TakeMySigns.MediumComponent</item>-->
+        <!--        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.TakeMySigns.LargeComponent</item>-->
+
+        <!--        &lt;!&ndash;Component styles&ndash;&gt;-->
+        <!--        <item name="materialAlertDialogTheme">@style/ThemeOverlay.TakeMySigns.AlertDialog</item>-->
+        <!--        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.TakeMySigns.BottomSheetDialog</item>-->
+        <!--        <item name="toolbarStyle">@style/Widget.TakeMySigns.Toolbar</item>-->
+        <!--        <item name="materialButtonStyle">@style/Widget.TakeMySigns.Button</item>-->
+        <!--        <item name="buttonOutlineStyle">@style/Widget.TakeMySigns.OutlinedButton</item>-->
+        <!--        <item name="buttonTextStyle">@style/Widget.TakeMySigns.TextButton</item>-->
+        <!--        <item name="toolbarNavigationButtonStyle">@style/Widget.TakeMySigns.Toolbar.Navigation.Tinted</item>-->
+    </style>
+
+    <style name="Base.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="alphaEmphasisHigh">@dimen/alpha_emphasis_high</item>
+        <item name="alphaEmphasisMedium">@dimen/alpha_emphasis_medium</item>
+        <item name="alphaEmphasisDisabled">@dimen/alpha_emphasis_disabled</item>
+
+        <item name="android:statusBarColor">?colorSurface</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/navigation_bar_color</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">
+            @bool/use_light_navigation_bar
+        </item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">@color/transparent
+        </item>
+
+        <!--Remap legacy AppCompat attributes to MaterialComponent attributes-->
+        <item name="colorPrimaryDark">?colorPrimaryVariant</item>
+        <item name="colorAccent">?colorPrimaryVariant</item>
+    </style>
+
+    <style name="ThemeOverlay.TakeMySigns.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
+    </style>
+</resources>
