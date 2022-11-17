@@ -22,33 +22,33 @@
         <item name="colorOnError">@color/color_on_error</item>
 
         <!--Material type attributes-->
-        <!--        <item name="textAppearanceHeadline1">@style/TextAppearance.TakeMySigns.Headline1</item>-->
-        <!--        <item name="textAppearanceHeadline2">@style/TextAppearance.TakeMySigns.Headline2</item>-->
-        <!--        <item name="textAppearanceHeadline3">@style/TextAppearance.TakeMySigns.Headline3</item>-->
-        <!--        <item name="textAppearanceHeadline4">@style/TextAppearance.TakeMySigns.Headline4</item>-->
-        <!--        <item name="textAppearanceHeadline5">@style/TextAppearance.TakeMySigns.Headline5</item>-->
-        <!--        <item name="textAppearanceHeadline6">@style/TextAppearance.TakeMySigns.Headline6</item>-->
-        <!--        <item name="textAppearanceSubtitle1">@style/TextAppearance.TakeMySigns.Subtitle1</item>-->
-        <!--        <item name="textAppearanceSubtitle2">@style/TextAppearance.TakeMySigns.Subtitle2</item>-->
-        <!--        <item name="textAppearanceBody1">@style/TextAppearance.TakeMySigns.Body1</item>-->
-        <!--        <item name="textAppearanceBody2">@style/TextAppearance.TakeMySigns.Body2</item>-->
-        <!--        <item name="textAppearanceButton">@style/TextAppearance.TakeMySigns.Button</item>-->
-        <!--        <item name="textAppearanceCaption">@style/TextAppearance.TakeMySigns.Caption</item>-->
-        <!--        <item name="textAppearanceOverline">@style/TextAppearance.TakeMySigns.Overline</item>-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.TakeMySigns.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.TakeMySigns.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.TakeMySigns.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.TakeMySigns.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.TakeMySigns.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.TakeMySigns.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.TakeMySigns.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.TakeMySigns.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.TakeMySigns.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.TakeMySigns.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.TakeMySigns.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.TakeMySigns.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.TakeMySigns.Overline</item>
 
-        <!--        &lt;!&ndash;Material shape attributes&ndash;&gt;-->
-        <!--        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.TakeMySigns.SmallComponent</item>-->
-        <!--        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.TakeMySigns.MediumComponent</item>-->
-        <!--        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.TakeMySigns.LargeComponent</item>-->
+        <!--Material shape attributes-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.TakeMySigns.SmallComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.TakeMySigns.MediumComponent</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.TakeMySigns.LargeComponent</item>
 
-        <!--        &lt;!&ndash;Component styles&ndash;&gt;-->
-        <!--        <item name="materialAlertDialogTheme">@style/ThemeOverlay.TakeMySigns.AlertDialog</item>-->
-        <!--        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.TakeMySigns.BottomSheetDialog</item>-->
-        <!--        <item name="toolbarStyle">@style/Widget.TakeMySigns.Toolbar</item>-->
-        <!--        <item name="materialButtonStyle">@style/Widget.TakeMySigns.Button</item>-->
-        <!--        <item name="buttonOutlineStyle">@style/Widget.TakeMySigns.OutlinedButton</item>-->
-        <!--        <item name="buttonTextStyle">@style/Widget.TakeMySigns.TextButton</item>-->
-        <!--        <item name="toolbarNavigationButtonStyle">@style/Widget.TakeMySigns.Toolbar.Navigation.Tinted</item>-->
+        <!--Component styles-->
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.TakeMySigns.AlertDialog</item>
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.TakeMySigns.BottomSheetDialog</item>
+        <item name="toolbarStyle">@style/Widget.TakeMySigns.Toolbar</item>
+        <item name="materialButtonStyle">@style/Widget.TakeMySigns.Button</item>
+        <item name="buttonOutlineStyle">@style/Widget.TakeMySigns.OutlinedButton</item>
+        <item name="buttonTextStyle">@style/Widget.TakeMySigns.TextButton</item>
+        <item name="toolbarNavigationButtonStyle">@style/Widget.TakeMySigns.Toolbar.Navigation.Tinted</item>
     </style>
 
     <style name="Base.MaterialThemeBuilder" parent="Theme.MaterialComponents.DayNight.NoActionBar">

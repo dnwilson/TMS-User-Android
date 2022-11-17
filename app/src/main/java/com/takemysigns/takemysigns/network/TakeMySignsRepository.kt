@@ -1,15 +1,13 @@
 package com.takemysigns.takemysigns.network
 
-import android.content.SharedPreferences
-import com.takemysigns.takemysigns.util.CryptoManager
-import java.io.File
-import java.io.FileOutputStream
+import android.util.Log
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import retrofit2.Response
 
-object TakeMySignsRepository {
-//    private var tmsApi = TakeMySignsApi? = null
-    fun signIn(phoneNumber: String, password: String) {
-        TakeMySignsApiProvider.login(phoneNumber, password)
-
-        println("Login successfull")
-    }
+class TakeMySignsRepository constructor(private val tmsService: TakeMySignsService) {
+    private val TAG: String = TakeMySignsRepository::class.java.name
+    suspend fun signIn(requestBody: RequestBody) = tmsService.login(requestBody)
 }

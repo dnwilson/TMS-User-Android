@@ -19,8 +19,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object TakeMySignsApiProvider {
     private val TAG: String = TakeMySignsApiProvider::class.java.name
-
-    fun login(phoneNumber: String, password: String): Pair<User, String> {
+    suspend fun login(phoneNumber: String, password: String) {
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
@@ -28,11 +27,12 @@ object TakeMySignsApiProvider {
             .baseUrl(BASE_URL) // change this IP for testing by your actual machine IP
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
-        val service = retrofit.create(TakeMySignsApi::class.java)
+        val service = retrofit.create(TakeMySignsService::class.java)
         val params = JSONObject()
         params.put("phone_number", phoneNumber)
         params.put("password", password)
 
+        Log.d(TAG, "Making api call...")
         val paramString = params.toString()
         val requestBody = paramString.toRequestBody("application/json".toMediaTypeOrNull())
         var user: User? = null
@@ -40,7 +40,7 @@ object TakeMySignsApiProvider {
 
         CoroutineScope(Dispatchers.IO).launch {
             val response = service.login(requestBody)
-
+            Log.d(TAG, "Response --- ${response.body()}")
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
@@ -60,11 +60,9 @@ object TakeMySignsApiProvider {
                 }
             }
         }
-
-        return user!! to token!!
     }
 
-    fun get(phoneNumber: String, password: String) : TakeMySignsApi {
+    fun get(phoneNumber: String, password: String) : TakeMySignsService {
         val credentials = ("$phoneNumber:$password").toByteArray()
         val authToken = "Basic"+ Base64.encodeToString(credentials, Base64.NO_WRAP)
         val okHttpClient = OkHttpClient.Builder()
@@ -84,6 +82,6 @@ object TakeMySignsApiProvider {
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-        return retrofit.create(TakeMySignsApi::class.java)
+        return retrofit.create(TakeMySignsService::class.java)
     }
 }

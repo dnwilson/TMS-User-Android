@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:name="com.takemysigns.takemysigns.base.TakeMySignsApp"
         android:allowBackup="true"
@@ -15,17 +25,29 @@
         android:theme="@style/Theme.TakeMySigns.DayNight"
         tools:targetApi="31"
         android:usesCleartextTraffic="true">
+        <service
+            android:name="com.takemysigns.takemysigns.network.PushNotificationService"
+            android:exported="false">
+            <intent-filter>
+                <action
+                    android:name="com.google.firebase.MESSAGING_EVENT">
+                </action>
+            </intent-filter>
+        </service>
         <activity
-            android:name="com.takemysigns.takemysigns.main.StartActivity"
+            android:name="com.takemysigns.takemysigns.main.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.TakeMySigns.DayNight">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        <activity-->
+<!--            android:name="com.takemysigns.takemysigns.main.StartActivity"-->
+<!--            android:exported="true"-->
+<!--            android:theme="@style/Theme.TakeMySigns.DayNight" />-->
     </application>
-
 </manifest>

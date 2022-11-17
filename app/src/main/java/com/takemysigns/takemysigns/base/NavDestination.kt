@@ -7,7 +7,7 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsIntent.SHARE_STATE_ON
 import androidx.navigation.NavOptions
 import androidx.navigation.navOptions
-import com.takemysigns.TakeMySigns.R
+import com.takemysigns.takemysigns.R
 import com.takemysigns.takemysigns.util.BASE_URL
 import dev.hotwire.turbo.config.TurboPathConfigurationProperties
 import dev.hotwire.turbo.config.context

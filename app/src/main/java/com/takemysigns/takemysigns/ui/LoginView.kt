@@ -1,9 +1,10 @@
 package com.takemysigns.takemysigns.ui
 
+import android.os.Build
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,9 +16,12 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -32,18 +36,31 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
-import com.takemysigns.TakeMySigns.R
+import com.takemysigns.takemysigns.R
 import com.takemysigns.takemysigns.base.Routes
+import com.takemysigns.takemysigns.base.TakeMySignsApp
+import com.takemysigns.takemysigns.network.TakeMySignsRepository
+import com.takemysigns.takemysigns.network.TakeMySignsService
 import com.takemysigns.takemysigns.ui.helpers.PasswordFieldState
 import com.takemysigns.takemysigns.ui.helpers.PhoneFieldState
+import com.takemysigns.takemysigns.ui.theme.TakeMySignsTheme
+import com.takemysigns.takemysigns.viewmodels.LoginViewModel
+import kotlinx.coroutines.GlobalScope.coroutineContext
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 
 @Composable
-fun LoginView(navController: NavController, signIn: (phoneNumber: String, password: String) -> Unit) {
+fun LoginView(
+    navController: NavController,
+    viewModel: LoginViewModel
+) {
     val phoneNumber = remember { PhoneFieldState(label = "Phone number") }
     val password = remember { PasswordFieldState(label = "Password") }
     val canSubmit = password.isValid() && phoneNumber.isValid()
     val localFocusManager = LocalFocusManager.current
+    val composableScope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -62,11 +79,10 @@ fun LoginView(navController: NavController, signIn: (phoneNumber: String, passwo
                     .align(Alignment.CenterHorizontally)
             )
             Text(
-                text = "Take My Signs",
-                color = colorResource(id = R.color.color_primary),
+                text = "Temporary Sign\nPlacement Service",
+                color = MaterialTheme.colors.primary,
                 textAlign = TextAlign.Center,
-                fontWeight = FontWeight.Black,
-                fontSize = 28.sp
+                style = MaterialTheme.typography.h1
             )
         }
 
@@ -102,18 +118,16 @@ fun LoginView(navController: NavController, signIn: (phoneNumber: String, passwo
                 },
                 onImeAction = {
                     localFocusManager.moveFocus(FocusDirection.Down)
-                    if (password.isValid() && phoneNumber.isValid()) {
-                        signIn(phoneNumber.text, password.text)
-                    }
-                },
+                }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            Box() {
+            Column() {
                 Button(
-                    onClick = { navController.navigate(Routes.Login.name) },
-                    modifier = Modifier
-                        .padding(bottom = 16.dp)
-                        .fillMaxWidth(),
+                    onClick = {
+                        viewModel.signIn(phoneNumber.text, password.text)
+                        println("Goodbye World! -- ${TakeMySignsApp.getAuthToken()}")
+                    },
+                    modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(8.dp),
                     enabled = canSubmit,
                     colors = ButtonDefaults.buttonColors(
@@ -125,7 +139,31 @@ fun LoginView(navController: NavController, signIn: (phoneNumber: String, passwo
                         "Login",
                         modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
                         fontSize = 18.sp,
+                        style = MaterialTheme.typography.body1,
                         fontWeight = FontWeight.Bold
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+
+                TextButton(
+                    onClick = {
+                        navController.navigate(Routes.Register.name)
+                    },
+                    modifier = Modifier
+                        .padding(bottom = 16.dp)
+                        .fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        backgroundColor = colorResource(id = R.color.transparent),
+                        contentColor = MaterialTheme.colors.primary
+                    )
+                ) {
+                    Text(
+                        "Register",
+                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        fontSize = 18.sp,
+                        style = MaterialTheme.typography.body1
                     )
                 }
             }
@@ -136,7 +174,10 @@ fun LoginView(navController: NavController, signIn: (phoneNumber: String, passwo
 @Preview
 @Composable
 fun LoginViewPreview() {
-    LoginView(navController = NavController(LocalContext.current), signIn = {
-        phoneNumber, password -> {}
-    })
+    TakeMySignsTheme {
+        LoginView(
+            navController = NavController(LocalContext.current),
+            viewModel = LoginViewModel(TakeMySignsRepository(TakeMySignsService.getInstance()))
+        )
+    }
 }

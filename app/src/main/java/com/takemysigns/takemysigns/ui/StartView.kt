@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.takemysigns.TakeMySigns.R
+import com.takemysigns.takemysigns.R
 import com.takemysigns.takemysigns.base.Routes
 
 @Composable

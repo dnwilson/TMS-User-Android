@@ -8,7 +8,7 @@ import android.widget.ImageView
 import dev.hotwire.turbo.fragments.TurboFragment
 import dev.hotwire.turbo.nav.TurboNavGraphDestination
 import com.bumptech.glide.Glide
-import com.takemysigns.TakeMySigns.R
+import com.takemysigns.takemysigns.R
 import com.takemysigns.takemysigns.base.NavDestination
 import com.takemysigns.takemysigns.util.displayBackButtonAsCloseIcon
 

@@ -9,7 +9,7 @@ abstract class InputFieldState(
     var label: String,
     private val validator: (String) -> Boolean = { true }
 ) {
-    var text by mutableStateOf("")
+    open var text by mutableStateOf("")
     var error by mutableStateOf<String?>(null)
 
     fun validate() {

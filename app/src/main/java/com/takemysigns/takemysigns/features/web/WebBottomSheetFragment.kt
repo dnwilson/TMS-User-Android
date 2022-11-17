@@ -2,7 +2,7 @@ package com.takemysigns.takemysigns.features.web
 
 import android.os.Bundle
 import android.view.View
-import com.takemysigns.TakeMySigns.R
+import com.takemysigns.takemysigns.R
 import com.takemysigns.takemysigns.base.NavDestination
 import dev.hotwire.turbo.fragments.TurboWebBottomSheetDialogFragment
 import dev.hotwire.turbo.nav.TurboNavGraphDestination

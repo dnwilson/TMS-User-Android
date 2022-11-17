@@ -3,8 +3,6 @@ package com.takemysigns.takemysigns.base
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
-import android.preference.PreferenceManager.getDefaultSharedPreferences
 
 class PrefUtils {
     companion object {

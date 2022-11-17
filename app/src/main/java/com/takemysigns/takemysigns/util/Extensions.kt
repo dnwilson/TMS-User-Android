@@ -7,7 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.webkit.WebSettingsCompat
 import androidx.webkit.WebViewFeature
-import com.takemysigns.TakeMySigns.R
+import com.takemysigns.takemysigns.R
 import dev.hotwire.turbo.config.TurboPathConfigurationProperties
 
 val TurboPathConfigurationProperties.description: String?

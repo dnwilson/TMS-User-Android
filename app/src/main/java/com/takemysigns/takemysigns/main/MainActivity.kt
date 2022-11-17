@@ -3,7 +3,7 @@ package com.takemysigns.takemysigns.main
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.takemysigns.TakeMySigns.R
+import com.takemysigns.takemysigns.R
 import dev.hotwire.turbo.activities.TurboActivity
 import dev.hotwire.turbo.delegates.TurboActivityDelegate
 

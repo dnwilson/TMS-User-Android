@@ -1,9 +1,9 @@
 package com.takemysigns.takemysigns.main
 
+import android.annotation.SuppressLint
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.takemysigns.takemysigns.features.authentication.StartPageFragment
 import com.takemysigns.takemysigns.features.web.WebBottomSheetFragment
 import com.takemysigns.takemysigns.features.web.WebFragment
 import com.takemysigns.takemysigns.features.web.WebHomeFragment
@@ -31,10 +31,7 @@ class MainSessionNavHostFragment : TurboSessionNavHostFragment() {
             WebHomeFragment::class,
             WebModalFragment::class,
             WebBottomSheetFragment::class,
-//            NumbersFragment::class,
-//            NumberBottomSheetFragment::class,
             ImageViewerFragment::class,
-            StartPageFragment::class,
         )
 
     override val pathConfigurationLocation: TurboPathConfiguration.Location
@@ -42,6 +39,7 @@ class MainSessionNavHostFragment : TurboSessionNavHostFragment() {
             assetFilePath = "json/configuration.json"
         )
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onSessionCreated() {
         super.onSessionCreated()
         session.webView.settings.userAgentString = customUserAgent(session.webView)

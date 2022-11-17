@@ -7,7 +7,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.input.OffsetMapping
 import androidx.compose.ui.text.input.TransformedText
 
-const val mask = "(xxx) xxx-xxxx"
+const val mask = "(619) 798-4867"
 fun mobileNumberFilter(text: AnnotatedString):
         TransformedText {
     // change the length
