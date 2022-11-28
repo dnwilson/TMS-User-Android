@@ -4,11 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.takemysigns.takemysigns.base.TakeMySignsApp
-import com.takemysigns.takemysigns.network.TakeMySignsApiProvider
+import com.takemysigns.takemysigns.models.User
 import com.takemysigns.takemysigns.network.TakeMySignsRepository
-import com.takemysigns.takemysigns.network.User
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

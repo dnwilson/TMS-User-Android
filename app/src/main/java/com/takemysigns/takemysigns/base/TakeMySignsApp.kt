@@ -7,13 +7,13 @@ import android.content.SharedPreferences.Editor
 import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 class TakeMySignsApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-//        val context = applicationContext
-        Log.d("TakeMySignsApp", "onCreateTriggered...")
         val masterKey = MasterKey.Builder(applicationContext)
             .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
             .build()
@@ -32,10 +32,9 @@ class TakeMySignsApp : Application() {
         private var instance : TakeMySignsApp? = null
         private lateinit var sharedPreferences: SharedPreferences
         private lateinit var editor: Editor
-
-//        private fun applicationContext(): Context {
-//            return instance!!.applicationContext
-//        }
+        val moshi: Moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
 
         fun getSharedPreference(): SharedPreferences? {
             return sharedPreferences
@@ -69,6 +68,10 @@ class TakeMySignsApp : Application() {
 
         fun disableFirstRun() {
             return editor.putBoolean("KEY_FIRST_RUN", false).apply()
+        }
+
+        fun isLoggedIn(): Boolean {
+            return getAuthToken() != null
         }
 
         fun resetFirstRun() {

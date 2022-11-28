@@ -1,7 +1,5 @@
 package com.takemysigns.takemysigns.ui
 
-import android.os.Build
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -36,7 +34,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.takemysigns.takemysigns.R
 import com.takemysigns.takemysigns.base.Routes
@@ -47,9 +44,6 @@ import com.takemysigns.takemysigns.ui.helpers.PasswordFieldState
 import com.takemysigns.takemysigns.ui.helpers.PhoneFieldState
 import com.takemysigns.takemysigns.ui.theme.TakeMySignsTheme
 import com.takemysigns.takemysigns.viewmodels.LoginViewModel
-import kotlinx.coroutines.GlobalScope.coroutineContext
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
 
 @Composable
 fun LoginView(

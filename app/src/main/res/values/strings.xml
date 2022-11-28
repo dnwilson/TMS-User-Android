@@ -8,4 +8,7 @@
     <string name="get_started">Get Started</string>
     <string name="hide_password">Hide Password</string>
     <string name="show_password">Show Password</string>
+    <string name="main_menu">Main Menu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

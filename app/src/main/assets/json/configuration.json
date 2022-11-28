@@ -1,11 +1,12 @@
 {
   "settings": {
-    "screenshots_enabled": true
+    "screenshots_enabled": true,
+    "tabs": "[{\"url\":\"\",\"icon\":\"home\",\"label\":\"Home\"},{\"url\":\"/orders?scope=previous\",\"icon\":\"history\",\"label\":\"Orders\"},{\"url\":\"/notifications\",\"icon\":\"notifications\",\"label\":\"Notifications\"},{\"url\":\"/help\",\"icon\":\"help\",\"label\":\"Help\"},{\"url\":\"/profile\",\"icon\":\"account_circle\",\"label\":\"Profile\"}]"
   },
   "rules": [
     {
       "patterns": [
-        ".*"
+        "^.*"
       ],
       "properties": {
         "context": "default",
@@ -26,21 +27,21 @@
     },
     {
       "patterns": [
-        "/sign-in$"
-      ],
-      "properties": {
-        "context": "modal",
-        "pull_to_refresh_enabled": false
-      }
-    },
-    {
-      "patterns": [
-        "/new$"
+        "/new$",
+        "/edit$",
+        "/duplicate$"
       ],
       "properties": {
         "context": "modal",
         "uri": "turbo://fragment/web/modal/sheet",
         "pull_to_refresh_enabled": false
+      }
+    },
+    {
+      "patterns": [ "/start-app$" ],
+      "properties": {
+        "uri": "turbo://fragment/start-app",
+        "title": "Auth"
       }
     },
     {
