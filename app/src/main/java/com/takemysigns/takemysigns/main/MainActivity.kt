@@ -63,10 +63,12 @@ class MainActivity : AppCompatActivity(), TurboActivity {
     }
 
     private fun replace(path: String) {
+        Log.d("WebFragments", "before replace ${delegate.currentNavDestination?.previousLocation}")
         Log.d("WebFragments", "Go to full url ${BASE_URL + path}")
         delegate.clearBackStack(onCleared = {
             Log.d("WebFragments", "Back stack is cleared")
             delegate.navigate(BASE_URL + path, options = TurboVisitOptions(action = TurboVisitAction.REPLACE))
+            Log.d("WebFragments", "Back stack is ${delegate.currentNavDestination?.previousLocation}")
         })
     }
 }

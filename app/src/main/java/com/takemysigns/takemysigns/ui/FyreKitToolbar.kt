@@ -1,16 +1,33 @@
 package com.takemysigns.takemysigns.ui
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.takemysigns.takemysigns.R
 import com.takemysigns.takemysigns.features.web.WebFragment
 import com.takemysigns.takemysigns.models.FyreKitMenuItem
@@ -23,21 +40,62 @@ fun FyreKitToolbar(
     actions: MutableState<List<FyreKitMenuItem>>,
     delegate: TurboNavDestination
 ) {
+    val webFragment = delegate as WebFragment
+
     TakeMySignsTheme {
         TopAppBar(
-            backgroundColor = colorResource(id = R.color.color_primary),
-            title = {
-                Text(
-                    text = title.value,
-                    color = colorResource(id = R.color.color_on_primary),
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            },
-            actions = {
-                ActionMenu(actions, delegate = delegate)
+            backgroundColor = colorResource(id = R.color.color_primary)
+        ) {
+            if (webFragment.hasBackStack()) {
+                IconButton(onClick = { delegate.navigateBack()}) {
+                    Icon(
+                        imageVector = Icons.Default.ArrowBack,
+                        contentDescription = "Back",
+                        tint = MaterialTheme.colors.onPrimary
+                    )
+                }
             }
-        )
+
+            Row(
+                Modifier.fillMaxHeight().weight(1f),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                ProvideTextStyle(value = MaterialTheme.typography.h6) {
+                    CompositionLocalProvider(
+                        LocalContentAlpha provides ContentAlpha.high,
+                        content = {
+                            if (actions.value.isEmpty() && title.value.isBlank()) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.logo),
+                                    contentDescription = "logo",
+                                    alignment = Alignment.Center,
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                            } else {
+                                Text(
+                                    text = title.value,
+                                    color = colorResource(id = R.color.color_on_primary),
+                                    modifier = Modifier.fillMaxWidth().padding(
+                                        start = if (webFragment.hasBackStack()) 0.dp else { 16.dp }
+                                    )
+                                )
+                            }
+                        }
+                    )
+                }
+            }
+
+            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                Row(
+                    Modifier.fillMaxHeight(),
+                    horizontalArrangement = Arrangement.End,
+                    verticalAlignment = Alignment.CenterVertically,
+                    content = {
+                        ActionMenu(actions, delegate = delegate)
+                    }
+                )
+            }
+        }
     }
 }
 
@@ -47,6 +105,17 @@ fun FyreKitToolbar(
 fun FyreKitToolbarPreview() {
     FyreKitToolbar(
         title = mutableStateOf("TakeMySigns"),
+        actions = mutableStateOf(emptyList()),
+        delegate = WebFragment()
+    )
+}
+
+@SuppressLint("UnrememberedMutableState")
+@Preview
+@Composable
+fun FyreKitToolbarWithoutTitlePreview() {
+    FyreKitToolbar(
+        title = mutableStateOf(""),
         actions = mutableStateOf(emptyList()),
         delegate = WebFragment()
     )

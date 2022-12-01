@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.ComposeView
+import androidx.navigation.fragment.findNavController
 import com.takemysigns.takemysigns.R
 import com.takemysigns.takemysigns.base.NavDestination
 import com.takemysigns.takemysigns.base.TakeMySignsApp
@@ -32,20 +33,24 @@ open class WebFragment : TurboWebFragment(), NavDestination {
     private lateinit var appBar: ComposeView
     var actions :  MutableState<List<FyreKitMenuItem>> = mutableStateOf(emptyList())
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//        val main = activity as MainActivity
-//
-//        val onBackPressedCallback = object : OnBackPressedCallback(false) {
-//            override fun handleOnBackPressed() {
-//                Log.d("ActionMenu", "onBackPressed")
-//                main.actions = mutableStateOf(emptyList())
-//            }
-//        }
-//
-//        main.onBackPressedDispatcher.addCallback(onBackPressedCallback)
-//    }
+    fun hasBackStack() : Boolean {
+        return (
+            when (previousLocation) {
+                BASE_URL -> {
+                    true
+                }
+                null -> {
+                    false
+                }
+                else -> {
+                    val main = activity as MainActivity
+                    val nonTabUrl = main.tabs.none { tabItem -> previousLocation == BASE_URL + tabItem.url }
+                    Log.d("WebFragments", "has stack $nonTabUrl --- $previousLocation")
+                    nonTabUrl
+                }
+            }
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
