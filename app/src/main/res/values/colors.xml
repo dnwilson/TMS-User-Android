@@ -21,6 +21,7 @@
     <color name="color_primary_variant">#1173C1</color>
     <color name="color_secondary">#e21c21</color>
     <color name="color_secondary_variant">#C81A1E</color>
+    <color name="color_translucent">#cc000000</color>
 
     <!--colorBackground appears behind scrollable content and is used for the default window-->
     <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->

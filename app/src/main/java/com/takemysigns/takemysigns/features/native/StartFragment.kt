@@ -3,7 +3,6 @@ package com.takemysigns.takemysigns.features.native
 import android.Manifest
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.sp
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavHostController
@@ -71,8 +69,6 @@ class StartFragment : TurboFragment(), NavDestination {
         }
 
         viewModel.token.observe(this) {
-            Log.d("StartFragment", "AuthToken is $it")
-
             if (TakeMySignsApp.getAuthToken()?.isNotBlank() == true) {
                 navController.popBackStack()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -113,7 +109,6 @@ class StartFragment : TurboFragment(), NavDestination {
     }
 
     private fun startApp() {
-        Log.d("StartFragment", "startApp: go to url - $")
         mainActivity.delegate.navigate(BASE_URL)
     }
 

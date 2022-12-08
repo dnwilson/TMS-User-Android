@@ -5,11 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
+import android.widget.TextView
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.ComposeView
-import androidx.navigation.fragment.findNavController
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.takemysigns.takemysigns.R
 import com.takemysigns.takemysigns.base.NavDestination
 import com.takemysigns.takemysigns.base.TakeMySignsApp
@@ -24,32 +25,103 @@ import dev.hotwire.turbo.config.title
 import dev.hotwire.turbo.fragments.TurboWebFragment
 import dev.hotwire.turbo.nav.TurboNavGraphDestination
 import dev.hotwire.turbo.views.TurboWebChromeClient
+import dev.hotwire.turbo.visit.TurboVisitAction
 import dev.hotwire.turbo.visit.TurboVisitAction.REPLACE
 import dev.hotwire.turbo.visit.TurboVisitOptions
 
 @TurboNavGraphDestination(uri = "turbo://fragment/web")
 open class WebFragment : TurboWebFragment(), NavDestination {
-    var title: MutableState<String> = mutableStateOf("")
     private lateinit var appBar: ComposeView
+    private lateinit var fab: FloatingActionButton
+    var title: MutableState<String> = mutableStateOf("")
     var actions :  MutableState<List<FyreKitMenuItem>> = mutableStateOf(emptyList())
+//    private lateinit var mainFab: ExtendedFloatingActionButton
+//    private lateinit var directionalFab: FloatingActionButton
+//    private lateinit var promotionalFab: FloatingActionButton
+//    private lateinit var directionalFabText: TextView
+//    private lateinit var promotionalFabText: TextView
+//    private var showFabs: Boolean = true
+
+//    private fun toggleTabs(visible: Boolean) {
+//        mainFab.visibility = if (visible) View.VISIBLE else { View.GONE }
+//        listOf(directionalFab, promotionalFab, directionalFabText, promotionalFabText)
+//            .forEach { view ->
+//                view.visibility = if (!visible) View.VISIBLE else { View.GONE }
+//            }
+//    }
+
+//    private fun setupFloatingActionButtons() {
+//        mainFab.shrink()
+//
+//        mainFab.setOnClickListener {
+//            showFabs = if (!showFabs!!) {
+//                directionalFab.show()
+//                promotionalFab.show()
+//                directionalFabText.visibility = View.VISIBLE
+//                promotionalFabText.visibility = View.VISIBLE
+//
+//                mainFab.extend()
+//
+//                true
+//            } else {
+//
+//                directionalFab.hide()
+//                promotionalFab.hide()
+//                directionalFabText.visibility = View.GONE
+//                promotionalFabText.visibility = View.GONE
+//
+//                mainFab.shrink()
+//
+//                false
+//            }
+//        }
+//
+//        directionalFab.setOnClickListener {
+//            navigate("$BASE_URL/orders/new?order%5Bservice_id%5D=1", options = TurboVisitOptions(action = TurboVisitAction.REPLACE))
+//        }
+//
+//        promotionalFab.setOnClickListener {
+//            navigate("$BASE_URL/orders/new?order%5Bservice_id%5D=2", options = TurboVisitOptions(action = TurboVisitAction.REPLACE))
+//        }
+//    }
+
+    private fun observeToolbarChanges() {
+        fragmentViewModel.title.observe(viewLifecycleOwner) {
+            title.value = it
+        }
+    }
+
+    private fun toggleFab() {
+        if (location == BASE_URL) { fab.show() } else { fab.hide() }
+    }
 
     fun hasBackStack() : Boolean {
-        return (
-            when (previousLocation) {
-                BASE_URL -> {
-                    true
-                }
-                null -> {
-                    false
-                }
-                else -> {
-                    val main = activity as MainActivity
-                    val nonTabUrl = main.tabs.none { tabItem -> previousLocation == BASE_URL + tabItem.url }
-                    Log.d("WebFragments", "has stack $nonTabUrl --- $previousLocation")
-                    nonTabUrl
-                }
+        Log.d("LOCATION", "location: $location --- previousLocation: $previousLocation")
+        val main = activity as MainActivity
+        return main.tabs.none { tabItem -> location == BASE_URL + tabItem.url }
+    }
+
+    override fun createWebChromeClient(): TurboWebChromeClient {
+        return FyreKitWebViewChromeClient(session)
+    }
+
+    override fun onVisitStarted(location: String) {
+        super.onVisitStarted(location)
+
+        toggleFab()
+    }
+
+    override fun onVisitCompleted(location: String, completedOffline: Boolean) {
+        super.onVisitCompleted(location, completedOffline)
+
+        toggleFab()
+
+        if (!TakeMySignsApp.pushTokenSaved() && TakeMySignsApp.getPushToken()?.isNotBlank() == true) {
+            val script = "window.bridge.register('${TakeMySignsApp.getPushToken()}', 'android');"
+            session.webView.evaluateJavascript(script) {
+                TakeMySignsApp.setPushTokenSaved(true)
             }
-        )
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,7 +132,6 @@ open class WebFragment : TurboWebFragment(), NavDestination {
             BASE_URL + _tab.url == location
         }
 
-        Log.d("WebFragment", "title (1) ----- ${title.value}")
         main.bottomNavigation.visibility = if (tab == null) View.GONE else {
             View.VISIBLE
         }
@@ -70,19 +141,26 @@ open class WebFragment : TurboWebFragment(), NavDestination {
             pathProperties.title?.let {
                 fragmentViewModel.setTitle(it)
                 title.value = it
-                Log.d("ActionMenu", "Menu should be changing --- $it")
             }
         }
-
-        Log.d("WebFragment", "title (2) ----- ${title.value}")
-        Log.d("WebFragment", "currentNavDestination ----- ${sessionNavHostFragment.currentNavDestination}")
 
         appBar = view.findViewById(R.id.compose_view)
         appBar.setContent {
             FyreKitToolbar(title = title, actions = actions, delegate = this)
         }
 
-        setupMenu()
+        fab = view.findViewById(R.id.fab)
+        fab.setOnClickListener {
+            navigate("$BASE_URL/orders/new")
+        }
+
+//        directionalFab = view.findViewById(R.id.add_directional_fab)
+//        promotionalFab = view.findViewById(R.id.add_promotional_fab)
+//        directionalFabText = view.findViewById(R.id.directional_fab_text)
+//        promotionalFabText = view.findViewById(R.id.promotional_fab_text)
+
+//        mainFab.visibility = View.VISIBLE
+//        setupFloatingActionButtons()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -98,7 +176,6 @@ open class WebFragment : TurboWebFragment(), NavDestination {
     }
 
     override fun onVisitErrorReceived(location: String, errorCode: Int) {
-        Log.d("WebFragment -- onVisitErrorReceived", errorCode.toString())
         when (errorCode) {
             401 -> {
                 if (TakeMySignsApp.isLoggedIn()) {
@@ -110,28 +187,5 @@ open class WebFragment : TurboWebFragment(), NavDestination {
             }
             else -> super.onVisitErrorReceived(location, errorCode)
         }
-    }
-    override fun toolbarForNavigation(): Toolbar? {
-//        return view?.findViewById(R.id.toolbar)
-        return null
-    }
-
-//    fun topBarForNavigation(): Unit? {
-//        return view?.findViewById<ComposeView>(R.id.compose_view)?.setContent {
-//            FyreKitToolbar(title = title)
-//        }
-//    }
-
-    private fun observeToolbarChanges() {
-        fragmentViewModel.title.observe(viewLifecycleOwner) {
-            title.value = it
-        }
-    }
-
-    private fun setupMenu() {
-    }
-
-    override fun createWebChromeClient(): TurboWebChromeClient {
-        return FyreKitWebViewChromeClient(session)
     }
 }

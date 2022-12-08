@@ -4,7 +4,6 @@ import android.Manifest
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,7 +28,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.android.material.composethemeadapter.MdcTheme
 import com.takemysigns.takemysigns.R
 import com.takemysigns.takemysigns.base.Routes
-import okhttp3.Route
+import com.takemysigns.takemysigns.ui.theme.TakeMySignsTheme
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -100,7 +99,7 @@ fun CameraPermissions(navController: NavController) {
 @Preview
 @Composable
 fun CameraAccessPreview() {
-    MdcTheme() {
+    TakeMySignsTheme {
         CameraPermissions(navController = NavController(LocalContext.current))
     }
 }

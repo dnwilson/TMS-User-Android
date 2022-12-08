@@ -44,14 +44,14 @@ fun FyreKitToolbar(
 
     TakeMySignsTheme {
         TopAppBar(
-            backgroundColor = colorResource(id = R.color.color_primary)
+            backgroundColor = colorResource(id = R.color.white)
         ) {
             if (webFragment.hasBackStack()) {
                 IconButton(onClick = { delegate.navigateBack()}) {
                     Icon(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Back",
-                        tint = MaterialTheme.colors.onPrimary
+                        tint = MaterialTheme.colors.primary
                     )
                 }
             }
@@ -66,15 +66,15 @@ fun FyreKitToolbar(
                         content = {
                             if (actions.value.isEmpty() && title.value.isBlank()) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.logo),
+                                    painter = painterResource(id = R.drawable.ic_logo),
                                     contentDescription = "logo",
                                     alignment = Alignment.Center,
-                                    modifier = Modifier.fillMaxWidth()
+                                    modifier = Modifier.fillMaxWidth().fillMaxHeight().padding(vertical = 4.dp)
                                 )
                             } else {
                                 Text(
                                     text = title.value,
-                                    color = colorResource(id = R.color.color_on_primary),
+                                    color = colorResource(id = R.color.color_primary),
                                     modifier = Modifier.fillMaxWidth().padding(
                                         start = if (webFragment.hasBackStack()) 0.dp else { 16.dp }
                                     )

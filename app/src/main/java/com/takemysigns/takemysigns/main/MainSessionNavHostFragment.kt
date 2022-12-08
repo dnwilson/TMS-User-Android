@@ -1,13 +1,7 @@
 package com.takemysigns.takemysigns.main
 
-import android.R
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.util.Log
-import android.webkit.JsPromptResult
-import android.webkit.JsResult
-import android.webkit.WebChromeClient
 import android.webkit.WebView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
@@ -74,19 +68,8 @@ class MainSessionNavHostFragment : TurboSessionNavHostFragment() {
 
     fun addMenuToToolbar(menuButton: ActionButton) {
         val toolbar = session.currentVisitNavDestination?.toolbarForNavigation()
-        Log.d("MainSessionNavHostFragment", "Menu item")
         toolbar?.menu?.forEach { menuItem ->
             menuItem.isVisible = true
-            Log.d("MainSessionNavHostFragment", "Menu item $menuItem")
         }
-//        val menu = toolbar?.menu
-//        Log.d("MainSessionNavHostFragment", "addMenuToToolbar")
-//
-//        val activity = session.currentVisitNavDestination?.fragment?.activity as MainActivity
-//        val resources = activity.resources!!
-//        val packageName = activity.packageName
-//        menu?.add(menuButton.name)
-//            ?.setIcon(ResourcesCompat.getDrawable(resources, resources.getIdentifier("notifications", "drawable", packageName), activity.theme))
-//            ?.title = null
     }
 }

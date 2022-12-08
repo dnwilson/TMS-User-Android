@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
-import android.util.Log
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import com.squareup.moshi.Moshi
@@ -29,6 +28,8 @@ class TakeMySignsApp : Application() {
     }
 
     companion object {
+        const val REQUESTED_PAGE = "requested_page"
+        const val NOTIFICATION_ID = "82416"
         private var instance : TakeMySignsApp? = null
         private lateinit var sharedPreferences: SharedPreferences
         private lateinit var editor: Editor
@@ -64,6 +65,14 @@ class TakeMySignsApp : Application() {
 
         fun isFirstRun() : Boolean {
             return sharedPreferences.getBoolean("KEY_FIRST_RUN", true)
+        }
+
+        fun setPushTokenSaved(saved: Boolean = false) {
+            editor.putBoolean("KEY_PUSH_TOKEN_SAVED", saved).apply()
+        }
+
+        fun pushTokenSaved() : Boolean {
+            return sharedPreferences.getBoolean("KEY_PUSH_TOKEN_SAVED", false)
         }
 
         fun disableFirstRun() {

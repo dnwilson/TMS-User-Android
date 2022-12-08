@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--This will be the parent Floating Action Button-->
+    <!--After the implementation the Floating Action Button at
+         the bottom right corner as we have constrained accordingly-->
+    <!--After clicking the above button the
+        following two buttons will pop up.
+         So this button is considered as parent FAB-->
+    <!--After opening the application it looks like regular
+        FAB but after user clicks it, it extends-->
+    <!--This functionality has been handled in the MainActivity.java-->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/color_primary"
+        android:text="New Order"
+        app:icon="@drawable/ic_plus"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!--Floating action button for add alarm-->
+    <!--Make sure that you are constraining this
+        button to the parent button-->
+    <!--Make sure to add backgroundTint attribute to match
+         the entire application color-->
+    <!--because after changing the base application theme the color
+         of the FAB is set Blue as default-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_promotional_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/color_primary"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/fab"
+        app:layout_constraintEnd_toEndOf="@id/fab"
+        app:srcCompat="@drawable/ic_promotional" />
+
+    <!--Action name text for the add alarm button-->
+    <!--Make sure that you are constraining this
+        Text to the add Alarm FAB button-->
+    <TextView
+        android:id="@+id/promotional_fab_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Promotional Order"
+        android:paddingVertical="2dp"
+        android:paddingHorizontal="4dp"
+        android:visibility="gone"
+        android:textColor="@color/color_primary"
+        android:background="@drawable/rounded_corner"
+        app:layout_constraintBottom_toBottomOf="@id/add_promotional_fab"
+        app:layout_constraintEnd_toStartOf="@id/add_promotional_fab"
+        app:layout_constraintTop_toTopOf="@id/add_promotional_fab" />
+
+    <!--Floating action button for add person-->
+    <!--Make sure that you are constraining this button
+        to the add Alarm FAB button-->
+    <!--Make sure to add backgroundTint attribute to match
+         the entire application color-->
+    <!--because after changing the base application theme
+         the color of the FAB is set Blue as default-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_directional_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/color_primary"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/add_promotional_fab"
+        app:layout_constraintEnd_toEndOf="@id/add_promotional_fab"
+        app:layout_constraintStart_toStartOf="@id/add_promotional_fab"
+        app:srcCompat="@drawable/ic_directional" />
+
+    <!--Action name text for the add person button-->
+    <!--Make sure that you are constraining this Text
+         to the add Person FAB button-->
+    <TextView
+        android:id="@+id/directional_fab_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Directional Order"
+        android:paddingVertical="2dp"
+        android:paddingHorizontal="4dp"
+        android:textColor="@color/color_primary"
+        android:background="@drawable/rounded_corner"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/add_directional_fab"
+        app:layout_constraintEnd_toStartOf="@id/add_directional_fab"
+        app:layout_constraintTop_toTopOf="@id/add_directional_fab" />
+</androidx.constraintlayout.widget.ConstraintLayout>
